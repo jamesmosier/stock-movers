@@ -2,7 +2,7 @@ const FontFaceObserver = require('fontfaceobserver');
 
 const Fonts = () => {
   const link = document.createElement('link');
-  link.href = 'https://fonts.googleapis.com/css?family=Work+Sans:400,700';
+  link.href = 'https://fonts.googleapis.com/css?family=Work+Sans:400,600,700';
   link.rel = 'stylesheet';
 
   document.head.appendChild(link);

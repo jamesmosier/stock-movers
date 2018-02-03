@@ -65,11 +65,11 @@ export default class extends React.Component {
 
   render() {
     const moversUpList = this.props.movingUp.map((stock) => {
-      return <StockItem key={stock.symbol} stock={stock} />;
+      return <StockItem key={stock.symbol} stock={stock} direction={'up'} />;
     });
 
     const moversDownList = this.props.movingDown.map((stock) => {
-      return <StockItem key={stock.symbol} stock={stock} />;
+      return <StockItem key={stock.symbol} stock={stock} direction={'down'} />;
     });
 
     return (
@@ -79,6 +79,13 @@ export default class extends React.Component {
           :global(body) {
             margin: 0;
             font-family: 'Work Sans', sans-serif;
+            background-color: #f7f6ed;
+          }
+
+          ul {
+            list-style-type: none;
+            padding-left: 0;
+            position: relative;
           }
         `}</style>
         <style jsx>{stylesIndex}</style>
