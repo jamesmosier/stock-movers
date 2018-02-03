@@ -7,9 +7,12 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-loader": "^7.1.2",
+    "fontfaceobserver": "^2.0.13",
     "lodash.find": "^4.6.0",
     "next": "^4.2.3",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "styled-jsx-css-loader": "^0.3.0"
   }
 }

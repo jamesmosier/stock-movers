@@ -1,36 +1,19 @@
 import React from 'react';
-// import Link from 'next/link';
-// import Head from '../components/head';
-// import Nav from '../components/nav';
 import axios from 'axios';
 import _find from 'lodash.find';
 
+import Head from '../components/head';
+import Fonts from '../utils/font-observer';
+import StockItem from '../components/stock-item';
+import stylesIndex from '../styles/index.css';
+
 export default class extends React.Component {
+  componentDidMount() {
+    Fonts();
+  }
+
   static async getInitialProps({ req }) {
     try {
-      // const movingUpResp = await axios.get('https://api.robinhood.com/midlands/movers/sp500/?direction=up');
-      // const movingUpData = movingUpResp.data.results;
-
-      // const movingDownData = await axios.get('https://api.robinhood.com/midlands/movers/sp500/?direction=down');
-
-      // const movingUpSymbols = movingUpData
-      //   .map((item) => {
-      //     return item.symbol;
-      //   })
-      //   .join(',');
-
-      // const movingUpQuotes = await axios.get(`https://api.robinhood.com/quotes/?symbols=${movingUpSymbols}`);
-      // const movingUp = movingUpData.map((item) => {
-      //   const quote = _find(movingUpQuotes.data.results, { symbol: item.symbol });
-
-      //   return {
-      //     symbol: item.symbol,
-      //     last_pct: item.price_movement.market_hours_last_movement_pct,
-      //     last_price: item.price_movement.market_hours_last_price,
-      //     quote: quote,
-      //   };
-      // });
-
       const getData = (direction) => {
         try {
           return new Promise(async (resolve, reject) => {
@@ -82,22 +65,38 @@ export default class extends React.Component {
 
   render() {
     const moversUpList = this.props.movingUp.map((stock) => {
-      return <li key={stock.symbol}>{stock.symbol}</li>;
+      return <StockItem key={stock.symbol} stock={stock} />;
     });
 
     const moversDownList = this.props.movingDown.map((stock) => {
-      return <li key={stock.symbol}>{stock.symbol}</li>;
+      return <StockItem key={stock.symbol} stock={stock} />;
     });
 
     return (
-      <article>
-        <h2>Movers Up</h2>
-        <div>
-          <ul>{moversUpList}</ul>
-        </div>
-        <h2>Movers Down</h2>
-        <div>
-          <ul>{moversDownList}</ul>
+      <article className="c">
+        <Head title="Stock Movers" />
+        <style jsx>{`
+          :global(body) {
+            margin: 0;
+            font-family: 'Work Sans', sans-serif;
+          }
+        `}</style>
+        <style jsx>{stylesIndex}</style>
+
+        <div className="row">
+          <section className="6 col">
+            <h2>Movers Up</h2>
+            <div>
+              <ul>{moversUpList}</ul>
+            </div>
+          </section>
+
+          <section className="6 col">
+            <h2>Movers Down</h2>
+            <div>
+              <ul>{moversDownList}</ul>
+            </div>
+          </section>
         </div>
       </article>
     );
