@@ -1,5 +1,20 @@
+// http://beta.morningstar.com/stocks/xnas/${stock.symbol}/quote.html
+
 export default (props) => {
   const { stock, direction } = props;
+
+  const stockInfoUrl = 'https://finance.yahoo.com/quote/';
+
+  const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+
+  const round = (num) => {
+    return currencyFormatter.format(num); //Math.round(num * 100) / 100;
+  };
+
   return (
     <li key={stock.symbol} className="list-item">
       <style jsx>{`
@@ -39,19 +54,24 @@ export default (props) => {
 
       <div>
         <span className="item-label">Symbol:</span>
-        <span className={`item-symbol item-symbol-${direction}`}>{stock.symbol}</span>
+        <a href={`${stockInfoUrl}${stock.symbol}`} className={`item-symbol item-symbol-${direction}`} target="_blank">
+          {stock.symbol}
+        </a>
       </div>
-      <div>
-        <span className="item-label">Bid Price:</span>
-        <span>${stock.quote.bid_price}</span>
-      </div>
-      <div>
-        <span className="item-label">Ask Price:</span>
-        <span>${stock.quote.ask_price}</span>
-      </div>
+
       <div>
         <span className="item-label">Previous Close:</span>
-        <span>${stock.quote.previous_close}</span>
+        <span>{round(stock.quote.previous_close)}</span>
+      </div>
+
+      <div>
+        <span className="item-label">Bid Price:</span>
+        <span>{round(stock.quote.bid_price)}</span>
+      </div>
+
+      <div>
+        <span className="item-label">Ask Price:</span>
+        <span>{round(stock.quote.ask_price)}</span>
       </div>
     </li>
   );
