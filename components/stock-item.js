@@ -50,6 +50,23 @@ export default (props) => {
         .item-symbol-down {
           color: #bd6464;
         }
+
+        .current-divider {
+          border-top: 1px solid #ccc;
+          width: 60%;
+          padding-top: 5px;
+        }
+
+        .company-name {
+          color: #2f7a98;
+          width: 250px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: inline-block;
+          margin: 0;
+          vertical-align: bottom;
+        }
       `}</style>
 
       <div>
@@ -57,6 +74,11 @@ export default (props) => {
         <a href={`${stockInfoUrl}${stock.symbol}`} className={`item-symbol item-symbol-${direction}`} target="_blank">
           {stock.symbol}
         </a>
+      </div>
+
+      <div>
+        <span className="item-label">Company:</span>
+        <span className="company-name">{stock.currentQuote.companyName}</span>
       </div>
 
       <div>
@@ -72,6 +94,11 @@ export default (props) => {
       <div>
         <span className="item-label">Ask Price:</span>
         <span>{round(stock.quote.ask_price)}</span>
+      </div>
+
+      <div className="current-divider" title={stock.currentQuote.latestTime}>
+        <span className="item-label">Current Latest Price</span>
+        <span>{round(stock.currentQuote.latestPrice)}</span>
       </div>
     </li>
   );
