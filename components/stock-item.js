@@ -1,7 +1,8 @@
 // http://beta.morningstar.com/stocks/xnas/${stock.symbol}/quote.html
+import Styles from './styles';
 
 export default (props) => {
-  const { stock, direction } = props;
+  const { stock, direction, toggleNews } = props;
 
   const stockInfoUrl = 'https://finance.yahoo.com/quote/';
 
@@ -17,57 +18,7 @@ export default (props) => {
 
   return (
     <li key={stock.symbol} className="list-item">
-      <style jsx>{`
-        .list-item {
-          margin-bottom: 30px;
-          position: relative;
-          counter-increment: step-counter;
-        }
-
-        .list-item:before {
-          content: counter(step-counter);
-          position: absolute;
-          left: -60px;
-          font-size: 60px;
-          top: 13px;
-          color: #e0e0e0;
-        }
-
-        .item-label {
-          font-weight: 600;
-          margin-right: 5px;
-        }
-
-        .item-symbol {
-          font-weight: bold;
-          font-size: 19px;
-        }
-
-        .item-symbol-up {
-          color: #64bd85;
-        }
-
-        .item-symbol-down {
-          color: #bd6464;
-        }
-
-        .current-divider {
-          border-top: 1px solid #ccc;
-          width: 60%;
-          padding-top: 5px;
-        }
-
-        .company-name {
-          color: #2f7a98;
-          width: 250px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: inline-block;
-          margin: 0;
-          vertical-align: bottom;
-        }
-      `}</style>
+      <style jsx>{Styles}</style>
 
       <div>
         <span className="item-label">Symbol:</span>
@@ -78,7 +29,15 @@ export default (props) => {
 
       <div>
         <span className="item-label">Company:</span>
-        <span className="company-name">{stock.currentQuote.companyName}</span>
+        <a
+          href="#"
+          onClick={() => {
+            toggleNews(stock.symbol);
+          }}
+          className="company-name"
+        >
+          {stock.currentQuote.companyName}
+        </a>
       </div>
 
       <div>

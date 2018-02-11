@@ -10,9 +10,13 @@
     "babel-loader": "^7.1.2",
     "fontfaceobserver": "^2.0.13",
     "lodash.find": "^4.6.0",
+    "lodash.size": "^4.2.0",
+    "luxon": "^0.4.0",
     "next": "^4.2.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-motion-drawer": "^2.1.7",
+    "styled-jsx": "^2.2.4",
     "styled-jsx-css-loader": "^0.3.0"
   }
 }
