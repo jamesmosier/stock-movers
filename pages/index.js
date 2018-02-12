@@ -127,10 +127,10 @@ export default class extends React.Component {
         <Head title="Stock Movers" />
         <style jsx global>{`
           :global(body) {
-            overflow: hidden;
             margin: 0;
             font-family: 'Work Sans', sans-serif;
             background-color: #f7f6ed;
+            ${this.state.drawerOpen ? 'overflow: hidden;' : ''};
           }
 
           ul {

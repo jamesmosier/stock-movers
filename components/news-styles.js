@@ -12,6 +12,7 @@ export default css`
   }
 
   .article-source {
+    color: #9c9c9c;
     display: block;
     margin-bottom: 0;
   }
