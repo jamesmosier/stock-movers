@@ -6,7 +6,6 @@ import Drawer from 'react-motion-drawer';
 
 import Head from '../components/head';
 import Nav from '../components/nav';
-import Fonts from '../utils/font-observer';
 import StockItem from '../components/stock-item';
 import NewsItem from '../components/news-item';
 import stylesIndex from '../styles/index';
@@ -31,10 +30,6 @@ export default class extends React.Component {
         symbol: '',
       },
     };
-  }
-
-  componentDidMount() {
-    Fonts();
   }
 
   static async getInitialProps({ req }) {
@@ -125,13 +120,8 @@ export default class extends React.Component {
 
     return (
       <div>
-        <Head title="Stock Movers" />
-        <Nav />
         <style jsx global>{`
           :global(body) {
-            margin: 0;
-            font-family: 'Work Sans', sans-serif;
-            background-color: #f7f6ed;
             ${this.state.drawerOpen ? 'overflow: hidden;' : ''};
           }
 
