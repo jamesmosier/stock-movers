@@ -5,6 +5,7 @@ import _size from 'lodash.size';
 import Drawer from 'react-motion-drawer';
 
 import Head from '../components/head';
+import Nav from '../components/nav';
 import Fonts from '../utils/font-observer';
 import StockItem from '../components/stock-item';
 import NewsItem from '../components/news-item';
@@ -125,6 +126,7 @@ export default class extends React.Component {
     return (
       <div>
         <Head title="Stock Movers" />
+        <Nav />
         <style jsx global>{`
           :global(body) {
             margin: 0;
