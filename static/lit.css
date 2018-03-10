@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  margin: .5em 0;
+  margin: 0.5em 0;
 }
 @media (min-width: 35em) {
   .col {
@@ -33,7 +33,7 @@
 .card:focus,
 hr {
   outline: 0;
-  border: solid #fa0;
+  border: solid #0572c5;
 }
 .card,
 pre {
@@ -42,7 +42,7 @@ pre {
 }
 .btn:hover,
 a:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 .c {
   max-width: 60em;
@@ -69,13 +69,13 @@ h1 {
   font: 300 2.5em 'Work Sans';
 }
 a {
-  color: #fa0;
+  color: #0572c5;
   text-decoration: none;
 }
 .btn.primary {
   color: #fff;
-  background: #fa0;
-  border: solid #fa0;
+  background: #0572c5;
+  border: solid #0572c5;
 }
 pre {
   overflow: auto;
@@ -87,10 +87,15 @@ th {
   border-bottom: solid #eee;
 }
 .btn {
+  cursor: pointer;
   padding: 1em;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   background: #fff;
   border: solid;
-  font: .7em 'Work Sans';
+  font: 0.7em 'Work Sans';
+}
+
+.btn:hover {
+  background: #ccc;
 }

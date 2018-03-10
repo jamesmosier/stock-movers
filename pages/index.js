@@ -4,7 +4,6 @@ import _find from 'lodash.find';
 import _size from 'lodash.size';
 import Drawer from 'react-motion-drawer';
 
-import Head from '../components/head';
 import Nav from '../components/nav';
 import StockItem from '../components/stock-item';
 import NewsItem from '../components/news-item';
