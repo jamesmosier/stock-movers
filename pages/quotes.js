@@ -3,7 +3,7 @@ import axios from 'axios';
 import Drawer from 'react-motion-drawer';
 import _size from 'lodash.size';
 
-import ActiveItem from '../components/most-active-item';
+import QuoteItem from '../components/quote-item';
 import Nav from '../components/nav';
 import NewsItem from '../components/news-item';
 
@@ -39,6 +39,8 @@ export default class extends React.Component {
 
   async componentDidMount() {
     try {
+      document.title = 'Quotes | Stock Movers';
+
       const mostActive = await axios.get(`https://api.iextrading.com/1.0/stock/market/list/mostactive`);
       this.setState({
         listData: mostActive.data,
@@ -82,7 +84,7 @@ export default class extends React.Component {
 
   render() {
     const activeItems = this.state.listData.map((stock, index) => {
-      return <ActiveItem key={stock.symbol} stock={stock} toggleNews={this.toggleNews} rank={index + 1} />;
+      return <QuoteItem key={stock.symbol} stock={stock} toggleNews={this.toggleNews} rank={index + 1} />;
     });
 
     return (

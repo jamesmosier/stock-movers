@@ -91,6 +91,10 @@ export default class extends React.Component {
     }
   }
 
+  componentDidMount() {
+    document.title = 'S&P Winners & Losers | Stock Movers';
+  }
+
   toggleNews = async (symbol) => {
     if (symbol === this.state.news.symbol) {
       console.log('it is true!!!!!');

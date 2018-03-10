@@ -13,8 +13,8 @@ export default class DefaultDocument extends Document {
       <html>
         <Head>
           <meta charset="UTF-8" />
-          <title>{this.props.title || ''}</title>
-          <meta name="description" content={this.props.description || 'Stock market movements'} />
+          <title>S&P Winners & Losers | Stock Movers</title>
+          <meta name="description" content="Stock market movements" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans:400,600,700" />

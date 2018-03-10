@@ -1,10 +1,6 @@
 import Link from 'next/link';
 
-const linksArray = [
-  { href: 'https://github.com/segmentio/create-next-app', label: 'S&P 500 Movers' },
-  { href: '/most-active', label: 'Most Active' },
-  { href: '/volume', label: 'Volume Movers' },
-];
+const linksArray = [{ href: '/', label: 'S&P 500 Movers' }, { href: '/quotes', label: 'Quotes' }];
 const links = linksArray.map((link) => {
   link.key = `nav-link-${link.href}-${link.label}`;
   return link;

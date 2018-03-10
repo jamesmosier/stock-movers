@@ -16,6 +16,10 @@ export default (props) => {
     return currencyFormatter.format(num);
   };
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <div key={stock.symbol} className="ma-list-item">
       <style jsx>{Styles}</style>
@@ -44,15 +48,15 @@ export default (props) => {
               </tr>
               <tr>
                 <td>Latest Volume</td>
-                <td>{stock.latestVolume}</td>
+                <td>{numberWithCommas(stock.latestVolume)}</td>
               </tr>
               <tr>
                 <td>52 Week High</td>
-                <td>{stock.week52High}</td>
+                <td>{round(stock.week52High)}</td>
               </tr>
               <tr>
                 <td>52 Week Low</td>
-                <td>{stock.week52Low}</td>
+                <td>{round(stock.week52Low)}</td>
               </tr>
             </tbody>
           </table>
