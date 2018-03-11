@@ -5,6 +5,10 @@ export default css`
     font-size: 13px;
   }
 
+  td {
+    padding: 5px;
+  }
+
   .ma-rank {
     color: #9c9999;
     position: absolute;
@@ -12,14 +16,20 @@ export default css`
     top: 1px;
   }
 
+  .ma-heading {
+    font-size: 1em;
+  }
+
+  .ma-row {
+    border-spacing: 0;
+  }
+
   .ma-list-item {
     position: relative;
-    float: left;
-    width: calc(50% - 10px);
     background-color: #e6e6e2;
     margin: 5px;
     margin-bottom: 15px;
-    padding: 5px 10px;
+    padding: 0 10px;
     border: 1px solid #d6d6d6;
     border-radius: 2px;
     box-shadow: 3px 3px 10px #e0dcdc;

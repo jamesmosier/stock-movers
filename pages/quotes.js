@@ -34,6 +34,7 @@ export default class extends React.Component {
       },
       listData: [],
       listType: LIST_TYPE.MOST_ACTIVE,
+      quickListOpen: false,
     };
   }
 
@@ -82,23 +83,63 @@ export default class extends React.Component {
     }
   };
 
+  toggleQuickList = (e) => {
+    e.preventDefault();
+
+    this.setState({
+      quickListOpen: !this.state.quickListOpen,
+    });
+  };
+
   render() {
     const activeItems = this.state.listData.map((stock, index) => {
       return <QuoteItem key={stock.symbol} stock={stock} toggleNews={this.toggleNews} rank={index + 1} />;
     });
 
     return (
-      <div className="c">
+      <div className="c quotes-wrapper">
         <style jsx global>
           {`
             :global(body) {
               ${this.state.drawerOpen ? 'overflow: hidden;' : ''};
             }
 
+            .quotes-wrapper {
+              position: relative;
+            }
+
             ul {
               list-style-type: none;
               padding-left: 0;
               position: relative;
+            }
+
+            .quick-list {
+              display: none;
+              background: #efefef;
+              padding: 5px;
+              position: absolute;
+              z-index: 9;
+              box-shadow: 3px 3px 10px #c1c1c1;
+              border: 1px solid #d2d2d2;
+            }
+
+            .quick-list-active {
+              display: block;
+            }
+
+            .quick-list ol {
+              font-size: 12px;
+            }
+
+            a {
+              cursor: pointer;
+            }
+
+            .quick-list-toggle {
+              padding-left: 5px;
+              font-size: 12px;
+              text-align: right;
             }
           `}
         </style>
@@ -128,6 +169,23 @@ export default class extends React.Component {
               Top Volume
             </button>
           </div>
+        </div>
+
+        <a
+          className="quick-list-toggle"
+          onClick={(e) => {
+            this.toggleQuickList(e);
+          }}
+        >
+          Open Quick List
+        </a>
+
+        <div className={`quick-list ${this.state.quickListOpen ? 'quick-list-active' : ''}`}>
+          <ol>
+            {this.state.listData.map((stock, index) => {
+              return <li key={index}>{stock.companyName}</li>;
+            })}
+          </ol>
         </div>
 
         <div>{activeItems}</div>

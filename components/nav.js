@@ -9,12 +9,6 @@ const links = linksArray.map((link) => {
 const Nav = () => (
   <div className="c">
     <nav className="row card">
-      <div className="col">
-        <Link prefetch href="/">
-          <a>Home</a>
-        </Link>
-      </div>
-
       {links.map(({ key, href, label }) => (
         <div className="col" key={key}>
           <Link href={href}>

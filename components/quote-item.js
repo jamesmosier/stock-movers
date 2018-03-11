@@ -28,35 +28,33 @@ export default (props) => {
 
       <div>
         <a href={`${stockInfoUrl}${stock.symbol}`} className="ma-item-symbol" target="_blank">
-          <h5>
+          <h5 className="ma-heading">
             {stock.companyName} ({stock.symbol})
           </h5>
         </a>
       </div>
 
-      <div className="row">
+      <div className="row ma-row">
         <div className="6 col">
           <table className="w-100">
             <tbody>
               <tr>
                 <td>Current</td>
-                <td>{round(stock.latestPrice)}</td>
+                <td>
+                  <b>{round(stock.latestPrice)}</b>
+                </td>
               </tr>
               <tr>
                 <td>Open</td>
-                <td>{round(stock.open)}</td>
+                <td>
+                  <b>{round(stock.open)}</b>
+                </td>
               </tr>
               <tr>
                 <td>Latest Volume</td>
-                <td>{numberWithCommas(stock.latestVolume)}</td>
-              </tr>
-              <tr>
-                <td>52 Week High</td>
-                <td>{round(stock.week52High)}</td>
-              </tr>
-              <tr>
-                <td>52 Week Low</td>
-                <td>{round(stock.week52Low)}</td>
+                <td>
+                  <b>{numberWithCommas(stock.latestVolume)}</b>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -64,21 +62,38 @@ export default (props) => {
 
         <div className="6 col">
           <table className="w-100">
-            <tbody />
+            <tbody>
+              <tr>
+                <td>52 Week High</td>
+                <td>
+                  <b>{round(stock.week52High)}</b>
+                </td>
+              </tr>
+              <tr>
+                <td>52 Week Low</td>
+                <td>
+                  <b>{round(stock.week52Low)}</b>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <small className="news-wrapper">
+                    <a
+                      href="#"
+                      onClick={() => {
+                        toggleNews(stock.symbol);
+                      }}
+                    >
+                      News
+                    </a>
+                  </small>
+                </td>
+                <td />
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
-
-      <small className="news-wrapper">
-        <a
-          href="#"
-          onClick={() => {
-            toggleNews(stock.symbol);
-          }}
-        >
-          News
-        </a>
-      </small>
 
       {/* <div>
         <span className="ma-item-label">Open Price:</span>
