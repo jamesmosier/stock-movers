@@ -20,6 +20,8 @@ const drawerProps = {
 const LIST_TYPE = {
   MOST_ACTIVE: 'MOST_ACTIVE',
   TOP_VOLUME: 'TOP_VOLUME',
+  GAINERS: 'GAINERS',
+  LOSERS: 'LOSERS',
 };
 
 export default class extends React.Component {
@@ -68,10 +70,27 @@ export default class extends React.Component {
 
   toggleListType = async (listType = LIST_TYPE.MOST_ACTIVE) => {
     try {
-      const url =
-        listType === LIST_TYPE.TOP_VOLUME
-          ? 'https://api.iextrading.com/1.0/stock/market/list/iexvolume'
-          : 'https://api.iextrading.com/1.0/stock/market/list/mostactive';
+      let url = 'https://api.iextrading.com/1.0/stock/market/list/iexvolume';
+
+      switch (listType) {
+        case LIST_TYPE.TOP_VOLUME: {
+          url = 'https://api.iextrading.com/1.0/stock/market/list/iexvolume';
+          break;
+        }
+        case LIST_TYPE.MOST_ACTIVE: {
+          url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive';
+          break;
+        }
+        case LIST_TYPE.GAINERS: {
+          url = 'https://api.iextrading.com/1.0/stock/market/list/gainers';
+          break;
+        }
+        case LIST_TYPE.LOSERS: {
+          url = 'https://api.iextrading.com/1.0/stock/market/list/losers';
+          break;
+        }
+      }
+
       const resp = await axios.get(url);
 
       this.setState({
@@ -95,6 +114,13 @@ export default class extends React.Component {
     const activeItems = this.state.listData.map((stock, index) => {
       return <QuoteItem key={stock.symbol} stock={stock} toggleNews={this.toggleNews} rank={index + 1} />;
     });
+
+    const title =
+      this.state.listType === LIST_TYPE.MOST_ACTIVE
+        ? 'Most Active'
+        : this.state.listType === LIST_TYPE.TOP_VOLUME
+          ? 'Top Volume'
+          : this.state.listType === LIST_TYPE.GAINERS ? 'Gainers' : 'Losers';
 
     return (
       <div className="c quotes-wrapper">
@@ -146,7 +172,7 @@ export default class extends React.Component {
 
         <div className="row">
           <div className="8 col">
-            <h1>{this.state.listType === LIST_TYPE.MOST_ACTIVE ? 'Most Active' : 'Top Volume'}</h1>
+            <h1>{title}</h1>
           </div>
 
           <div className="4 col">
@@ -167,6 +193,26 @@ export default class extends React.Component {
               }}
             >
               Top Volume
+            </button>
+
+            <button
+              className="btn"
+              style={{ marginRight: '5px', background: this.state.listType == LIST_TYPE.GAINERS ? '#ccc' : '#fff' }}
+              onClick={() => {
+                this.toggleListType(LIST_TYPE.GAINERS);
+              }}
+            >
+              Gainers
+            </button>
+
+            <button
+              className="btn"
+              style={{ background: this.state.listType == LIST_TYPE.LOSERS ? '#ccc' : '#fff' }}
+              onClick={() => {
+                this.toggleListType(LIST_TYPE.LOSERS);
+              }}
+            >
+              Losers
             </button>
           </div>
         </div>
