@@ -1,4 +1,4 @@
-const FontFaceObserver = require('fontfaceobserver');
+import FontFaceObserver from 'fontfaceobserver';
 
 const Fonts = () => {
   const link = document.createElement('link');
@@ -13,11 +13,5 @@ const Fonts = () => {
     document.documentElement.classList.add('font-loaded');
   });
 };
-
-// .fonts-loaded {
-//   body {
-//     font-family: My Family, sans-serif;
-//   }
-// }
 
 export default Fonts;

@@ -53,10 +53,10 @@ export default class extends React.Component {
 
   toggleNews = async (symbol) => {
     if (symbol === this.state.news.symbol) {
-      console.log('it is true!!!!!');
       this.setState({ drawerOpen: true });
       return;
     }
+
     const newsResp = await axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/news`);
 
     this.setState({

@@ -94,27 +94,6 @@ export default (props) => {
           </table>
         </div>
       </div>
-
-      {/* <div>
-        <span className="ma-item-label">Open Price:</span>
-        <span>{round(stock.open)}</span>
-      </div>
-
-      <div>
-        <span className="ma-item-label">Close Price:</span>
-        <span>{round(stock.close)}</span>
-      </div>
-
-      <div>
-        <span className="ma-item-label">Latest Volume:</span>
-        <span>{stock.latestVolume}</span>
-      </div>
-
-      <div title={stock.latestTime}>
-        <span className="ma-item-label">Current Latest Price</span>
-        <span>{round(stock.latestPrice)}</span>
-      </div>
-      */}
     </div>
   );
 };

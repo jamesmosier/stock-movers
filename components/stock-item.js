@@ -13,7 +13,7 @@ export default (props) => {
   });
 
   const round = (num) => {
-    return currencyFormatter.format(num); //Math.round(num * 100) / 100;
+    return currencyFormatter.format(num);
   };
 
   return (

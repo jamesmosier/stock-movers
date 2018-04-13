@@ -54,7 +54,6 @@ export default class extends React.Component {
               moversRespData.map(async (item) => {
                 const quote = _find(moversQuotes.data.results, { symbol: item.symbol });
                 const currentQuote = currentQuotes.data[item.symbol].quote;
-                // const newsResp = await axios.get(`https://api.iextrading.com/1.0/stock/${item.symbol}/news`);
 
                 return {
                   symbol: item.symbol,
@@ -69,7 +68,7 @@ export default class extends React.Component {
             resolve(movers);
           });
         } catch (e) {
-          console.error('inside getdata', e);
+          console.error('Error occurred inside getData', e);
         }
       };
 
@@ -82,11 +81,11 @@ export default class extends React.Component {
         drawerOpen: false,
       };
     } catch (e) {
-      console.log('Error during getting data!');
-      console.log(e.code);
+      console.log('Error during getInitialProps.', e);
+
       return {
-        movingUp: [], //movingUp,
-        movingDown: [], //movingDown,
+        movingUp: [],
+        movingDown: [],
       };
     }
   }
@@ -97,7 +96,6 @@ export default class extends React.Component {
 
   toggleNews = async (symbol) => {
     if (symbol === this.state.news.symbol) {
-      console.log('it is true!!!!!');
       this.setState({ drawerOpen: true });
       return;
     }
@@ -139,6 +137,7 @@ export default class extends React.Component {
           }
         `}</style>
         <style jsx>{stylesIndex}</style>
+
         <article className="c">
           <div className="row">
             <section className="6 col">
