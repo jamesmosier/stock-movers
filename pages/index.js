@@ -33,17 +33,13 @@ export default class extends React.Component {
 
   static async getInitialProps({ req }) {
     try {
-      const getData = (direction) => {
-        try {
-          return new Promise(async (resolve, reject) => {
+      const getMoversData = (direction) => {
+        return new Promise(async (resolve, reject) => {
+          try {
             const moversResp = await axios.get(`https://api.robinhood.com/midlands/movers/sp500/?direction=${direction}`);
-            const moversRespData = moversResp.data.results;
+            const moversData = moversResp.data.results;
 
-            const moversSymbols = moversRespData
-              .map((item) => {
-                return item.symbol;
-              })
-              .join(',');
+            const moversSymbols = moversData.map((item) => item.symbol).join(',');
 
             const moversQuotes = await axios.get(`https://api.robinhood.com/quotes/?symbols=${moversSymbols}`);
             const currentQuotes = await axios.get(
@@ -51,7 +47,7 @@ export default class extends React.Component {
             );
 
             const movers = await Promise.all(
-              moversRespData.map(async (item) => {
+              moversData.map(async (item) => {
                 const quote = _find(moversQuotes.data.results, { symbol: item.symbol });
                 const currentQuote = currentQuotes.data[item.symbol].quote;
 
@@ -66,18 +62,19 @@ export default class extends React.Component {
             );
 
             resolve(movers);
-          });
-        } catch (e) {
-          console.error('Error occurred inside getData', e);
-        }
+          } catch (e) {
+            console.error('Error occurred inside getMoversData', e);
+            reject([]);
+          }
+        });
       };
 
-      const movingUp = await getData('up');
-      const movingDown = await getData('down');
+      const movingUp = await getMoversData('up');
+      const movingDown = await getMoversData('down');
 
       return {
-        movingUp: movingUp,
-        movingDown: movingDown,
+        movingUp,
+        movingDown,
         drawerOpen: false,
       };
     } catch (e) {
