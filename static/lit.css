@@ -69,8 +69,11 @@ h1 {
   font: 300 2.5em 'Work Sans';
 }
 a {
-  color: #0572c5;
+  color: #395892;
   text-decoration: none;
+}
+a.active {
+  font-weight: bold;
 }
 .btn.primary {
   color: #fff;

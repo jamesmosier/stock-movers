@@ -128,10 +128,6 @@ export default class extends React.Component {
             padding-left: 0;
             position: relative;
           }
-
-          a {
-            color: #7b1569;
-          }
         `}</style>
         <style jsx>{stylesIndex}</style>
 

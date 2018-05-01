@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from './nav-link';
 
 const linksArray = [{ href: '/', label: 'S&P 500 Movers' }, { href: '/quotes', label: 'Quotes' }];
 const links = linksArray.map((link) => {
@@ -6,18 +6,20 @@ const links = linksArray.map((link) => {
   return link;
 });
 
-const Nav = () => (
-  <div className="c">
-    <nav className="row card">
-      {links.map(({ key, href, label }) => (
-        <div className="col" key={key}>
-          <Link href={href}>
-            <a>{label}</a>
-          </Link>
-        </div>
-      ))}
-    </nav>
-  </div>
-);
+const Nav = ({ router }) => {
+  return (
+    <div className="c">
+      <nav className="row card">
+        {links.map(({ key, href, label }) => (
+          <div className="col" key={key}>
+            <NavLink activeClassName="active" href={href} router={router}>
+              <a>{label}</a>
+            </NavLink>
+          </div>
+        ))}
+      </nav>
+    </div>
+  );
+};
 
 export default Nav;
