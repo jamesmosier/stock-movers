@@ -3,9 +3,11 @@ import axios from 'axios';
 import Drawer from 'react-motion-drawer';
 import _size from 'lodash.size';
 
+import ToggleListButtons from '../components/toggle-list-buttons';
 import QuoteItem from '../components/quote-item';
 import Nav from '../components/nav';
 import NewsItem from '../components/news-item';
+import constants from '../utils/constants';
 
 const drawerProps = {
   overlayColor: 'rgba(0, 0, 0, 0.6)',
@@ -15,13 +17,6 @@ const drawerProps = {
     padding: '10px 15px',
     boxShadow: 'rgba(0, 0, 0, 0.188235) 0px 10px 20px, rgba(0, 0, 0, 0.227451) 0px 6px 6px',
   },
-};
-
-const LIST_TYPE = {
-  MOST_ACTIVE: 'MOST_ACTIVE',
-  TOP_VOLUME: 'TOP_VOLUME',
-  GAINERS: 'GAINERS',
-  LOSERS: 'LOSERS',
 };
 
 export default class extends React.Component {
@@ -35,7 +30,7 @@ export default class extends React.Component {
         symbol: '',
       },
       listData: [],
-      listType: LIST_TYPE.MOST_ACTIVE,
+      listType: constants.LIST_TYPE.MOST_ACTIVE,
       quickListOpen: false,
     };
   }
@@ -68,24 +63,24 @@ export default class extends React.Component {
     });
   };
 
-  toggleListType = async (listType = LIST_TYPE.MOST_ACTIVE) => {
+  toggleListType = async (listType = constants.LIST_TYPE.MOST_ACTIVE) => {
     try {
       let url = 'https://api.iextrading.com/1.0/stock/market/list/iexvolume';
 
       switch (listType) {
-        case LIST_TYPE.TOP_VOLUME: {
+        case constants.LIST_TYPE.TOP_VOLUME: {
           url = 'https://api.iextrading.com/1.0/stock/market/list/iexvolume';
           break;
         }
-        case LIST_TYPE.MOST_ACTIVE: {
+        case constants.LIST_TYPE.MOST_ACTIVE: {
           url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive';
           break;
         }
-        case LIST_TYPE.GAINERS: {
+        case constants.LIST_TYPE.GAINERS: {
           url = 'https://api.iextrading.com/1.0/stock/market/list/gainers';
           break;
         }
-        case LIST_TYPE.LOSERS: {
+        case constants.LIST_TYPE.LOSERS: {
           url = 'https://api.iextrading.com/1.0/stock/market/list/losers';
           break;
         }
@@ -110,17 +105,40 @@ export default class extends React.Component {
     });
   };
 
+  getTitle = () => {
+    return this.state.listType === constants.LIST_TYPE.MOST_ACTIVE
+      ? 'Most Active'
+      : this.state.listType === constants.LIST_TYPE.TOP_VOLUME
+        ? 'Top Volume'
+        : this.state.listType === constants.LIST_TYPE.GAINERS
+          ? 'Gainers'
+          : 'Losers';
+  };
+
   render() {
-    const activeItems = this.state.listData.map((stock, index) => {
+    let activeItems = this.state.listData.map((stock, index) => {
       return <QuoteItem key={stock.symbol} stock={stock} toggleNews={this.toggleNews} rank={index + 1} />;
     });
 
-    const title =
-      this.state.listType === LIST_TYPE.MOST_ACTIVE
-        ? 'Most Active'
-        : this.state.listType === LIST_TYPE.TOP_VOLUME
-          ? 'Top Volume'
-          : this.state.listType === LIST_TYPE.GAINERS ? 'Gainers' : 'Losers';
+    if (!activeItems.length) {
+      activeItems = <p style={{ marginLeft: '20px', fontWeight: 'bold', color: '#c32551' }}>No items to display right now 😞</p>;
+    }
+
+    let quickListButton = '';
+    if (this.state.listData && this.state.listData.length) {
+      quickListButton = (
+        <a
+          className="quick-list-toggle"
+          onClick={(e) => {
+            this.toggleQuickList(e);
+          }}
+        >
+          Open Quick List
+        </a>
+      );
+    }
+
+    const title = this.getTitle();
 
     return (
       <div className="c quotes-wrapper">
@@ -175,56 +193,10 @@ export default class extends React.Component {
             <h1>{title}</h1>
           </div>
 
-          <div className="4 col">
-            <button
-              className="btn"
-              style={{ marginRight: '5px', background: this.state.listType == LIST_TYPE.MOST_ACTIVE ? '#ccc' : '#fff' }}
-              onClick={() => {
-                this.toggleListType(LIST_TYPE.MOST_ACTIVE);
-              }}
-            >
-              Most Active
-            </button>
-            <button
-              className="btn"
-              style={{ background: this.state.listType == LIST_TYPE.TOP_VOLUME ? '#ccc' : '#fff' }}
-              onClick={() => {
-                this.toggleListType(LIST_TYPE.TOP_VOLUME);
-              }}
-            >
-              Top Volume
-            </button>
-
-            <button
-              className="btn"
-              style={{ marginRight: '5px', background: this.state.listType == LIST_TYPE.GAINERS ? '#ccc' : '#fff' }}
-              onClick={() => {
-                this.toggleListType(LIST_TYPE.GAINERS);
-              }}
-            >
-              Gainers
-            </button>
-
-            <button
-              className="btn"
-              style={{ background: this.state.listType == LIST_TYPE.LOSERS ? '#ccc' : '#fff' }}
-              onClick={() => {
-                this.toggleListType(LIST_TYPE.LOSERS);
-              }}
-            >
-              Losers
-            </button>
-          </div>
+          <ToggleListButtons toggleListType={this.toggleListType} listType={this.state.listType} />
         </div>
 
-        <a
-          className="quick-list-toggle"
-          onClick={(e) => {
-            this.toggleQuickList(e);
-          }}
-        >
-          Open Quick List
-        </a>
+        {quickListButton}
 
         <div className={`quick-list ${this.state.quickListOpen ? 'quick-list-active' : ''}`}>
           <ol>
