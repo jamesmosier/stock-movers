@@ -48,7 +48,9 @@ export default class extends React.Component {
 
   toggleNews = async (symbol) => {
     if (symbol === this.state.news.symbol) {
-      this.setState({ drawerOpen: true });
+      this.setState({ drawerOpen: true }, () => {
+        document.body.style.overflow = 'hidden';
+      });
       return;
     }
 
@@ -60,7 +62,15 @@ export default class extends React.Component {
         articles: newsResp.data,
         symbol,
       },
+    }, () => {
+      document.body.style.overflow = 'hidden';
     });
+  };
+
+  toggleDrawer = (open) => {
+    this.setState({ drawerOpen: open }, () => {
+      document.body.style.overflow = open ? 'hidden' : 'inherit';
+    })
   };
 
   toggleListType = async (listType = constants.LIST_TYPE.MOST_ACTIVE) => {
@@ -144,10 +154,6 @@ export default class extends React.Component {
       <div className="c quotes-wrapper">
         <style jsx global>
           {`
-            :global(body) {
-              ${this.state.drawerOpen ? 'overflow: hidden;' : ''};
-            }
-
             .quotes-wrapper {
               position: relative;
             }
@@ -214,7 +220,7 @@ export default class extends React.Component {
           fadeOut={true}
           width={500}
           open={this.state.drawerOpen}
-          onChange={(open) => this.setState({ drawerOpen: open })}
+          onChange={this.toggleDrawer}
         >
           <ul className="news-articles">
             {_size(this.state.news.articles) &&
