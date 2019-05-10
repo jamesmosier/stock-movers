@@ -41,21 +41,19 @@ export default class extends React.Component {
 
             const moversSymbols = moversData.map((item) => item.symbol).join(',');
 
-            const moversQuotes = await axios.get(`https://api.robinhood.com/quotes/?symbols=${moversSymbols}`);
             const currentQuotes = await axios.get(
-              `https://api.iextrading.com/1.0/stock/market/batch?symbols=${moversSymbols}&types=quote`
+              `https://api.iextrading.com/1.0/stock/market/batch?symbols=${moversSymbols}&types=quote,news`
             );
 
             const movers = await Promise.all(
               moversData.map(async (item) => {
-                const quote = _find(moversQuotes.data.results, { symbol: item.symbol });
+                // const quote = _find(moversQuotes.data.results, { symbol: item.symbol });
                 const currentQuote = currentQuotes.data[item.symbol].quote;
 
                 return {
                   symbol: item.symbol,
                   last_pct: item.price_movement.market_hours_last_movement_pct,
                   last_price: item.price_movement.market_hours_last_price,
-                  quote: quote,
                   currentQuote,
                 };
               })

@@ -42,17 +42,17 @@ export default (props) => {
 
       <div>
         <span className="item-label">Previous Close:</span>
-        <span>{round(stock.quote.previous_close)}</span>
+        <span>{round(stock.currentQuote.previousClose)}</span>
       </div>
 
       <div>
-        <span className="item-label">Bid Price:</span>
-        <span>{round(stock.quote.bid_price)}</span>
+        <span className="item-label">Latest Price:</span>
+        <span>{round(stock.currentQuote.latestPrice)}</span>
       </div>
 
       <div>
-        <span className="item-label">Ask Price:</span>
-        <span>{round(stock.quote.ask_price)}</span>
+        <span className="item-label">Real Time Price:</span>
+        <span>{round(stock.currentQuote.iexRealtimePrice)}</span>
       </div>
 
       <div className="current-divider" title={stock.currentQuote.latestTime}>
