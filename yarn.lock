@@ -2497,6 +2497,11 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
 duplexify@^3.4.2, duplexify@^3.5.3:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-3.5.4.tgz#4bb46c1796eabebeec4ca9a2e66b808cb7a3d8b4"
@@ -3336,6 +3341,14 @@ icss-utils@^4.0.0, icss-utils@^4.1.1:
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
+
+iex-cloud@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/iex-cloud/-/iex-cloud-2.2.0.tgz#e8ca45b8717871ae516bf37aafbaa20078b9a150"
+  integrity sha512-6V6v5OuTE3VS0V1VFdp6iM0niGKUtCAwC21jWdNP904xAOFA4ln9ZZ7bcssSjv2zZsJ6A2UXQOoVL5pcteo5aA==
+  dependencies:
+    dotenv "^8.2.0"
+    node-fetch "^2.6.0"
 
 iferr@^0.1.5:
   version "0.1.5"
@@ -4291,7 +4304,7 @@ next@9.4.4:
     webpack "4.43.0"
     webpack-sources "1.4.3"
 
-node-fetch@2.6.0:
+node-fetch@2.6.0, node-fetch@^2.6.0:
   version "2.6.0"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
