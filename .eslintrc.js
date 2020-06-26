@@ -11,5 +11,6 @@ module.exports = {
     'no-duplicate-imports': 'error',
     'jsx-a11y/no-autofocus': [0],
     'jsx-a11y/anchor-is-valid': [0],
+    'react/react-in-jsx-scope': [0],
   },
-};
+}

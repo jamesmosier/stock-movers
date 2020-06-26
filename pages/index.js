@@ -1,11 +1,23 @@
-import { list } from 'iex-cloud'
+import { list, quote } from 'iex-cloud'
+import Card from '../components/card'
+import styles from '../components/home/home.module.css'
 
-export default function Home(gainers) {
-  return <p>stock movers v2</p>
+export default function Home(props) {
+  console.log(props)
+  return (
+    <div className={styles.container}>
+      <div className={styles.stocksList}>
+        {props.gainers.map(stock => {
+          return <Card key={stock.symbol} {...stock} />
+        })}
+      </div>
+    </div>
+  )
 }
 
 export async function getServerSideProps() {
   const gainers = await list('gainers')
+  // const q = await quote('twtr')
   return { props: { gainers } }
 }
 

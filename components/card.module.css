@@ -1,0 +1,14 @@
+.card {
+  padding: 1rem;
+}
+
+.ticker {
+}
+
+.price {
+  font-size: 1.45rem;
+}
+
+.updatedDate {
+  font-size: 0.75rem;
+}

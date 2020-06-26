@@ -15,8 +15,8 @@ export default class DefaultDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
           <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&display=swap"
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Work+Sans:400,600,700&display=swap"
           />
           {/* <link rel="icon" href="/static/favicon.ico" /> */}
         </Head>

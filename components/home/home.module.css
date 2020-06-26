@@ -1,0 +1,7 @@
+.container {
+}
+
+.stocksList {
+  display: flex;
+  flex-direction: column;
+}
